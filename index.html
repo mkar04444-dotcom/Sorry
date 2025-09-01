@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Untitled</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khoma Korbe?</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        overflow: hidden;
+        margin: 0;
+        position: relative;
+        text-align: center;
+    }
+    .note {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px 30px;
+        border-radius: 20px;
+        margin-bottom: 25px;
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #444;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        animation: glow 2s infinite alternate;
+        z-index: 2;
+        position: relative;
+        transition: all 1s ease;
+    }
+    @keyframes glow {
+        from { box-shadow: 0 0 10px #ffb6c1; }
+        to { box-shadow: 0 0 25px #ff6b81; }
+    }
+    h1 {
+        margin: 10px 0 25px 0;
+        font-family: 'Dancing Script', cursive;
+        font-size: 3em;
+        background: linear-gradient(45deg, #ff6b81, #ff9a9e);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        z-index: 2;
+        position: relative;
+    }
+    button {
+        padding: 12px 30px;
+        margin: 10px;
+        font-size: 1.1em;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+        transition: transform 0.3s, box-shadow 0.3s, left 0.6s, top 0.6s;
+        z-index: 2;
+        position: relative;
+    }
+    button:hover {
+        transform: scale(1.1);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    }
+    #yesBtn {
+        background: linear-gradient(45deg, #ff6b81, #ff9a9e);
+        color: white;
+    }
+    #noBtn {
+        background: linear-gradient(45deg, #1e90ff, #00c6ff);
+        color: white;
+        position: absolute;
+    }
+    .quote {
+        position: absolute;
+        font-size: 1.1em;
+        color: #fff;
+        font-weight: bold;
+        animation: floatUp 2s forwards;
+        z-index: 2;
+    }
+    @keyframes floatUp {
+        0% {opacity: 1; transform: translateY(0);}
+        100% {opacity: 0; transform: translateY(-50px);}
+    }
+    .hearts, .loveText, .cartoon {
+        position: absolute;
+        animation: floatHeart 3s ease-out forwards;
+        z-index: 2;
+    }
+    .hearts {
+        font-size: 2em;
+    }
+    .loveText {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #ff3366;
+    }
+    .cartoon {
+        font-size: 3em;
+    }
+    @keyframes floatHeart {
+        0% {opacity: 1; transform: translateY(0) scale(1);}
+        100% {opacity: 0; transform: translateY(-200px) scale(1.5);}
+    }
+
+    /* Background bubbles */
+    #bgAnimation {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 0;
+    }
+    .bubble {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.3);
+        animation: rise 10s linear infinite;
+    }
+    @keyframes rise {
+        0% {transform: translateY(100vh) scale(1);}
+        100% {transform: translateY(-50px) scale(1.5);}
+    }
+</style>
+</head>
+<body>
+
+<div id="bgAnimation"></div>
+
+<div class="note" id="note">I’m really sorry 💌 Hope this little surprise makes you smile!</div>
+<h1>Khoma korbe?</h1>
+<button id="yesBtn">Yes 💖</button>
+<button id="noBtn">No 🙈</button>
+
+<script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const note = document.getElementById('note');
+    const body = document.body;
+
+    const quotes = [
+        "Please forgive me 😇",
+        "I'm really sorry 😢",
+        "Come on, give me one chance 💖",
+        "Without you, everything is dull 🌸",
+        "I promise to be better 💕",
+        "Life is cuter with you 🐼",
+        "Dil se sorry 😔",
+        "Tumi na thakle shob fanka 😞",
+        "Bhul hoye geche, khoma koro 🥺",
+        "Sayani, ekta chance dao 💓",
+        "Manish only happy with Sayani 🌹",
+        "Sorry sorry sorry… infinite sorry! 🙏",
+        "Forgive me, meri jaan ❤️"
+    ];
+
+    const loveQuotes = [
+        "Sayani ❤️ Manish",
+        "Forever Together 💕",
+        "Soulmates ✨",
+        "Love Wins 💖",
+        "My Jaan Sayani 🌸"
+    ];
+
+    // Yes button animation
+    yesBtn.addEventListener('click', () => {
+        note.style.transform = "translateY(-200px)";
+        note.style.opacity = "0";
+
+        // Floating hearts
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('hearts');
+            heart.textContent = '💖';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = Math.random() * window.innerHeight + 'px';
+            body.appendChild(heart);
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        // Continuous floating love texts
+        setInterval(() => {
+            const text = document.createElement('div');
+            text.classList.add('loveText');
+            if (Math.random() < 0.5) {
+                text.textContent = loveQuotes[Math.floor(Math.random() * loveQuotes.length)];
+            } else {
+                text.textContent = "Manish + Sayani 💕";
+            }
+            text.style.left = Math.random() * (window.innerWidth - 150) + 'px';
+            text.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+            body.appendChild(text);
+            setTimeout(() => text.remove(), 4000);
+        }, 1000);
+
+        // Cute cartoon (emoji hug)
+        const cartoon = document.createElement('div');
+        cartoon.classList.add('cartoon');
+        cartoon.textContent = '🤗💑';
+        cartoon.style.left = (window.innerWidth / 2 - 40) + 'px';
+        cartoon.style.top = (window.innerHeight / 2 - 40) + 'px';
+        body.appendChild(cartoon);
+        setTimeout(() => cartoon.remove(), 4000);
+    });
+
+    // Move No button smoothly
+    function moveNoButton() {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+
+        const quote = document.createElement('div');
+        quote.classList.add('quote');
+        quote.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+        quote.style.left = Math.random() * (window.innerWidth - 150) + 'px';
+        quote.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+        body.appendChild(quote);
+        setTimeout(() => quote.remove(), 2000);
+    }
+
+    noBtn.addEventListener('mouseover', moveNoButton); // PC
+    noBtn.addEventListener('touchstart', moveNoButton); // Mobile
+
+    // Background bubbles
+    const bg = document.getElementById('bgAnimation');
+    for (let i = 0; i < 30; i++) {
+        const bubble = document.createElement('div');
+        bubble.classList.add('bubble');
+        const size = 5 + Math.random() * 20;
+        bubble.style.width = bubble.style.height = size + 'px';
+        bubble.style.left = Math.random() * window.innerWidth + 'px';
+        bubble.style.animationDuration = 5 + Math.random() * 10 + 's';
+        bubble.style.opacity = 0.2 + Math.random() * 0.7;
+        bg.appendChild(bubble);
+    }
+
+    // Prevent text selection on mobile
+    document.addEventListener('touchstart', function(e){
+        e.preventDefault();
+    }, {passive:false});
+    document.addEventListener('touchmove', function(e){
+        e.preventDefault();
+    }, {passive:false});
+
+</script>
+
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
